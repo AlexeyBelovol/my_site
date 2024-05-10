@@ -23,7 +23,7 @@
     <header class="site-header">
       <nav class="navbar navbar-expand-md navbar-dark bg-blue fixed-top">
         <div class="container">
-          <a class="navbar-brand mr-4" href="{% url 'blog-home' %}"><i class='bx bxs-rocket bx-tada-hover'></i> Python Bytes</a>
+          <a class="navbar-brand mr-4" href="{% url 'blog-home' %}"><i class='bx bxs-rocket bx-tada-hover'></i> 101-пТК</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
           </button>
@@ -34,9 +34,17 @@
             </div>
             <!-- Правая часть навигационной панели -->
             <div class="navbar-nav">
+              <form class="form-inline my-2 my-lg-0" action="{% url 'search' %}" method="GET">
+                <input class="form-control mr-sm-2" type="search" placeholder="Пошук" aria-label="Search" name="q">
+                <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Пошук</button>
+            </form>
             {% if user.is_authenticated %}
-            	<a class="nav-item nav-link" href="{% url 'profile' %}">Профіль</a>
-            	<a class="nav-item nav-link" href="{% url 'logout' %}">Вихід</a>
+              <a class="nav-item nav-link" href="{% url 'post-create' %}">Новий запис</a>
+              <a class="nav-item nav-link" href="{% url 'profile' %}">Профіль</a>
+            	<form action="{% url 'logout' %}" method="post" id="logoutForm">
+                {% csrf_token %}
+                <button type="submit" class="nav-item nav-link">Вихід</button>
+            </form>
           	{% else %}
             	<a class="nav-item nav-link" href="{% url 'login' %}">Вхід</a>
             	<a class="nav-item nav-link" href="{% url 'register' %}">Реєстрація</a>
@@ -63,7 +71,7 @@
             <h3>Розділи</h3>
             <p class='text-muted'>Новини
               <ul class="list-group">
-                <li class="list-group-item list-group-item-light">Новіе записи</li>
+                <li class="list-group-item list-group-item-light">Нові записи</li>
                 <li class="list-group-item list-group-item-light">Об'яви</li>
                 <li class="list-group-item list-group-item-light">Змагання</li>
                 <li class="list-group-item list-group-item-light">Розклад</li>
